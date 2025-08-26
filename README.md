@@ -40,6 +40,7 @@ This system allows **Admins** to manage students, subjects, and marks, while **S
 
 ## 📂 Project Structure
 
+```plaintext
 student-result-management-system/
 ├── backend/
 │ ├── src/main/java/com/example/studentdb/
@@ -62,9 +63,6 @@ student-result-management-system/
 │ ├── schema.sql # 🏗 Database Schema (PostgreSQL/MySQL)
 │ └── seed.sql # 🌱 Sample Data for Testing
 │
-├── docker/
-│ ├── Dockerfile # 🐳 Container Setup
-│ └── docker-compose.yml # 🔄 Multi-container setup (App + DB)
-│
 ├── docs/ # 📘 Project Documentation, diagrams, API reference
 └── README.md # 📄 Project Overview
+
