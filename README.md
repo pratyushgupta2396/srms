@@ -40,20 +40,31 @@ This system allows **Admins** to manage students, subjects, and marks, while **S
 
 ## 📂 Project Structure
 
-src/
-├── main/
-│   ├── java/com/example/studentdb/
-│   │   ├── controller/        # MVC Controllers (Admin & Student endpoints)
-│   │   ├── entity/            # JPA Entities (Student, Subject, Mark, User)
-│   │   ├── repository/        # Spring Data JPA Repositories
-│   │   ├── dto/               # Data Transfer Objects (Result DTOs, etc.)
-│   │   ├── service/           # Business Logic Layer (Student, Result, Mark services)
-│   │   └── security/          # Spring Security Configuration (JWT/Session, Roles)
-│   │
-│   └── resources/
-│       ├── templates/         # Thymeleaf HTML Templates (Admin, Student views)
-│       ├── static/            # CSS, JS, Images, Bootstrap files
-│       └── application.properties  # Spring Boot App Configuration
+student-result-management-system/
+├── backend/
+│ ├── src/main/java/com/example/studentdb/
+│ │ ├── controller/ # 🎯 MVC Controllers (Admin & Student endpoints)
+│ │ ├── entity/ # 🗂 JPA Entities (Student, Subject, Mark, User)
+│ │ ├── repository/ # 💾 Spring Data JPA Repositories
+│ │ ├── dto/ # 📦 Data Transfer Objects (Result DTOs, etc.)
+│ │ ├── service/ # ⚙️ Business Logic Layer (Student, Result, Mark services)
+│ │ └── security/ # 🔐 Spring Security Configuration (Roles & Authentication)
+│ │
+│ ├── src/main/resources/
+│ │ ├── templates/ # 🖼 Thymeleaf HTML Templates (Admin, Student views)
+│ │ ├── static/ # 🎨 CSS, JS, Images, Bootstrap files
+│ │ └── application.properties # ⚡ Spring Boot App Configuration
+│ │
+│ ├── src/test/ # 🧪 Unit & Integration Tests
+│ └── pom.xml # 📋 Maven Configuration
 │
-└── test/                      # Unit & Integration Tests
-
+├── database/
+│ ├── schema.sql # 🏗 Database Schema (PostgreSQL/MySQL)
+│ └── seed.sql # 🌱 Sample Data for Testing
+│
+├── docker/
+│ ├── Dockerfile # 🐳 Container Setup
+│ └── docker-compose.yml # 🔄 Multi-container setup (App + DB)
+│
+├── docs/ # 📘 Project Documentation, diagrams, API reference
+└── README.md # 📄 Project Overview
