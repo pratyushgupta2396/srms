@@ -66,18 +66,66 @@ student-result-management-system/
 ├── docs/ # 📘 Project Documentation, diagrams, API reference
 └── README.md # 📄 Project Overview
 
+```
 ---
+## 📸 Screenshots
 
-## 📂 Project Screenshot
+### 🖥 Login Page
+![Login Page](login.png)
 
 ### 🖥 Admin Dashboard
 ![Admin Dashboard](admin-dashboard.png)
+
+### 🖥 Student Dashboard
+![Student Dashboard](student-dashboard.png)
 
 ### 👨‍🎓 Student Result Page
 ![Student Result](student-result.png)
 
 ### 📄 Download as PDF
 ![Result PDF](result-pdf.png)
+
+### 🖥 Manage Student
+![Manage Student](manage-student.png)
+
+### 🖥 All Student Result
+![All Student Result](all-student-result.png)
+
+---
+
+## ✨ Features Tables
+
+| Feature         | Admin | Student |
+| --------------- | ----- | ------- |
+| Dashboard       | ✅     | ✅       |
+| Manage Students | ✅     | ❌       |
+| Manage Subjects | ✅     | ❌       |
+| Add Marks       | ✅     | ❌       |
+| View Results    | ✅     | ✅       |
+| Download PDF    | ❌     | ✅       |
+
+---
+
+🚀 Quick Clone & Run
+# Clone the repository
+git clone https://github.com/<pratyushgupta2396>/srms.git
+
+# Go to project folder
+cd srms
+
+# Run the Spring Boot application
+mvn spring-boot:run
+
+
+Access Admin Panel: http://localhost:8080/admin
+
+Access Student Panel: http://localhost:8080/student
+
+
+
+
+
+
 
 
 
