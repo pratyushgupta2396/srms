@@ -66,3 +66,19 @@ student-result-management-system/
 ├── docs/ # 📘 Project Documentation, diagrams, API reference
 └── README.md # 📄 Project Overview
 
+---
+
+## 📂 Project Screenshot
+
+### 🖥 Admin Dashboard
+![Admin Dashboard](admin-dashboard.png)
+
+### 👨‍🎓 Student Result Page
+![Student Result](student-result.png)
+
+### 📄 Download as PDF
+![Result PDF](result-pdf.png)
+
+
+
+
