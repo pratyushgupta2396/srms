@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Mark - SRMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+          background: #f0f4ff;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        .navbar {
+          background: #0d6efd;
+        }
+        .navbar-brand {
+          font-weight: bold;
+          color: white !important;
+        }
+        .form-container {
+          max-width: 600px;
+          margin: 50px auto;
+          background: white;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+        }
+        footer {
+          background: #0d6efd;
+          color: white;
+          text-align: center;
+          padding: 12px;
+          margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand">SRMS Admin Panel</a>
+        <div>
+            <a class="btn btn-outline-light btn-sm" th:href="@{/admin/marks}">Back</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Form Container -->
+<div class="form-container">
+    <a class="btn btn-outline-light btn-sm" th:href="@{/admin/dashboard}">ADMIN Dashboard</a>
+    <h2 class="text-center mb-4">Add Mark</h2>
+    <form th:action="@{/admin/marks/save}" th:object="${mark}" method="post">
+
+        <!-- Student Dropdown with Roll Number -->
+        <div class="mb-3">
+            <label class="form-label">Roll No & Name</label>
+            <select class="form-select" th:field="*{student.id}" required>
+                <option value="">-- Select Roll No & Name --</option>
+                <option th:each="s : ${students}" th:value="${s.id}"
+                        th:text="${s.rollNumber + ' - ' + s.name}"></option>
+            </select>
+        </div>
+
+        <!-- Subject Dropdown -->
+        <div class="mb-3">
+            <label class="form-label">Subject</label>
+            <select class="form-select" th:field="*{subject.id}" required>
+                <option value="">-- Select Subject --</option>
+                <option th:each="sub : ${subjects}" th:value="${sub.id}" th:text="${sub.name}"></option>
+            </select>
+        </div>
+
+        <!-- Marks Input -->
+        <div class="mb-3">
+            <label class="form-label">Marks</label>
+            <input type="number" class="form-control" th:field="*{marks}" placeholder="Enter marks" required>
+        </div>
+
+        <!-- Error Message -->
+        <p th:if="${error}" class="text-danger fw-bold" th:text="${error}"></p>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Save Mark</button>
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Student Result Management System | Admin Panel
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

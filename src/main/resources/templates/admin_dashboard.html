@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - SRMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background: #0d6efd;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+        .dashboard-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        .card a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+        footer {
+            background: #0d6efd;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand">SRMS Admin Dashboard</a>
+        <div>
+
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-warning fw-bold" th:href="@{/logout}">🚪 Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="dashboard-container">
+    <div class="container">
+        <h2 class="text-center mb-4" th:text="${message}">Welcome, Admin</h2>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card p-4 text-center">
+                    <h5>👨‍🎓 Manage Students</h5>
+                    <p class="text-muted">Add, update and view student details</p>
+                    <a th:href="@{/admin/students}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-4 text-center">
+                    <h5>📚 Manage Subjects</h5>
+                    <p class="text-muted">Create and edit subject records</p>
+                    <a th:href="@{/admin/subjects}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-4 text-center">
+                    <h5>📝 Manage Marks</h5>
+                    <p class="text-muted">Enter and update student marks</p>
+                    <a th:href="@{/admin/marks}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-4 text-center">
+                    <h5>📊 View Results</h5>
+                    <p class="text-muted">See all students' results & search</p>
+                    <a th:href="@{/admin/results}" class="btn btn-success">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Student Result Management System | Admin Panel
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

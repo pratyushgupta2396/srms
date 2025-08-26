@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Student Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fc; min-height: 100vh; display: flex; flex-direction: column; }
+        .container { max-width: 1200px; flex: 1; }
+        h2 { color: #0d6efd; font-weight: bold; margin-bottom: 20px; }
+        .card { border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1); padding: 25px; margin-bottom: 30px; background: white; }
+        table { border-radius: 10px; overflow: hidden; }
+        tbody tr:hover { background-color: #f1f5ff; transition: 0.2s ease-in-out; }
+        .search-bar { display: flex; gap: 10px; margin-bottom: 20px; }
+        .pagination { justify-content: center; margin-top: 20px; }
+        .badge-pass { background-color: #28a745; font-size: 1rem; padding: 5px 12px; }
+        .badge-fail { background-color: #dc3545; font-size: 1rem; padding: 5px 12px; }
+        .collapse-row { background: #f8f9fa; }
+        .toggle-icon { cursor: pointer; }
+        footer { background: #0d6efd; color: white; text-align: center; padding: 10px; margin-top: auto; }
+        .navbar-brand { font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<!-- ===== Header/Navbar ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SRMS Admin</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/dashboard}">🏠 Home</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/admin/results}">📊 Results</a></li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-warning fw-bold" th:href="@{/logout}">🚪 Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Content ===== -->
+<div class="container mt-4">
+    <div class="card">
+        <h2>📊 Student Results</h2>
+
+        <!-- Search Form -->
+        <form th:action="@{/admin/results}" method="get" class="search-bar">
+            <input type="text" name="keyword" th:value="${keyword}" placeholder="Search by name or email" class="form-control">
+            <button type="submit" class="btn btn-primary">🔍 Search</button>
+            <a th:href="@{/admin/results}" class="btn btn-secondary">⟳ Reset</a>
+        </form>
+
+        <!-- Results Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="text-center table-primary">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Roll Number</th>
+                    <th>Total Marks</th>
+                    <th>Percentage</th>
+                    <th>Result</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sr, stat : ${studentResults}">
+                    <td th:text="${sr.student.name}" class="fw-bold text-primary"></td>
+                    <td th:text="${sr.student.email}"></td>
+                    <td th:text="${sr.student.rollNumber}"></td>
+                    <td th:text="${sr.totalMarks}" class="text-center"></td>
+                    <td th:text="${sr.percentage} + '%'" class="text-center"></td>
+                    <td class="text-center">
+                        <span th:text="${sr.resultStatus}"
+                              th:classappend="${sr.resultStatus == 'Pass'} ? 'badge badge-pass' : 'badge badge-fail'"></span>
+                    </td>
+                    <td class="text-center">
+                        <span class="toggle-icon" data-bs-toggle="collapse" th:attr="data-bs-target='#marksCollapse__${stat.index}'">+</span>
+                    </td>
+                </tr>
+
+                <!-- Collapsible Row inside same loop -->
+                <tr th:each="sr, stat : ${studentResults}" class="collapse-row">
+                    <td colspan="6" class="p-0">
+                        <div class="collapse" th:id="'marksCollapse__' + ${stat.index}">
+                            <table class="table mb-0">
+                                <thead>
+                                <tr class="table-secondary text-center">
+                                    <th>Subject</th>
+                                    <th>Marks</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="m : ${sr.student.marks}">
+                                    <td th:text="${m.subject.name}" class="text-center"></td>
+                                    <td th:text="${m.marks}" class="text-center"></td>
+                                </tr>
+                                <tr th:if="${sr.student.marks == null or #lists.isEmpty(sr.student.marks)}">
+                                    <td colspan="2" class="text-center text-muted">No marks available</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${page == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/admin/results(page=${page > 0 ? page-1 : 0}, keyword=${keyword})}">« Prev</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages-1)}"
+                    th:classappend="${i == page} ? 'active'">
+                    <a class="page-link" th:href="@{/admin/results(page=${i}, keyword=${keyword})}" th:text="${i+1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${page+1 >= totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/admin/results(page=${page+1 < totalPages ? page+1 : page}, keyword=${keyword})}">Next »</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+    <p>© 2025 Student Result Management System | Admin Panel</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

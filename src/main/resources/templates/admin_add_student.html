@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Student - SRMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f0f4ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar {
+      background: #0d6efd;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: white !important;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand">SRMS Admin Panel</a>
+    <div>
+      <a class="btn btn-outline-light btn-sm" th:href="@{/admin/students}">Back to List</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Form Container -->
+<div class="form-container">
+  <a class="btn btn-outline-light btn-sm" th:href="@{/admin/dashboard}">ADMIN Dashboard</a>
+  <h2 class="text-center mb-4">Add Student</h2>
+
+  <form th:action="@{/admin/students/save}" th:object="${student}" method="post">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control" th:field="*{name}" placeholder="Enter student name" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" th:field="*{email}" placeholder="Enter student email" required>
+    </div>
+
+    <!-- ✅ New Roll Number Field -->
+    <div class="mb-3">
+      <label class="form-label">Roll Number</label>
+      <input type="text" class="form-control" th:field="*{rollNumber}" placeholder="Enter roll number" required>
+    </div>
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Save Student</button>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 Student Result Management System | Admin Panel
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
