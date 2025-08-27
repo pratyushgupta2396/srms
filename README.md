@@ -106,20 +106,52 @@ student-result-management-system/
 
 ---
 
-🚀 Quick Clone & Run
-# Clone the repository
-git clone https://github.com/<pratyushgupta2396>/srms.git
+## How to Run
 
-# Go to project folder
-cd srms
+## Clone the repository:
+```
+git clone https://github.com/yourusername/studentdb.git
+```
 
-# Run the Spring Boot application
+## Setup PostgreSQL and update application.properties:
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/studentdb
+spring.datasource.username=yourusername
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+```
+
+## Run the application:
+```
 mvn spring-boot:run
+```
 
+## Open in browser:
+```
+http://localhost:8080/login
+```
 
 Access Admin Panel: http://localhost:8080/admin
-
 Access Student Panel: http://localhost:8080/student
+
+---
+
+## 🤝 Contributing
+Contributions are welcome!  
+If you’d like to improve this project, feel free to fork the repo and submit a pull request.  
+Please make sure to follow proper commit messages and coding guidelines.
+
+## 👨‍💻 Author
+**Pratyush Gupta**  
+- GitHub: [Pratyush Gupta](https://github.com/pratyushgupta2396)  
+- LinkedIn: [Pratyush Gupta](https://www.linkedin.com/in/pratyushgupta2396/)
+
+## 💬 Support & Feedback
+For any issues, bugs, or feature requests, please open an [issue here](../../issues).
+
+## 🙌 Acknowledgements
+Thanks for checking out this project! Give it a ⭐ if you found it helpful.
+
 
 
 
